@@ -1,0 +1,32 @@
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class tester {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String msg = "";
+		Scanner scan = new Scanner(System.in);
+		while(!(msg.equals("X"))){
+		try{
+		Socket socket = new Socket("192.168.200.114", 4444);
+		DataOutputStream dStream = new DataOutputStream(socket.getOutputStream());
+		msg = scan.nextLine();
+		dStream.writeUTF("Binay Says: "+ msg);
+		DataInputStream stream = new DataInputStream(socket.getInputStream());
+		msg = stream.readUTF();
+		System.out.println("Faisal Says: "+ msg);
+		}
+		catch(IOException ie)
+		{
+		ie.printStackTrace();
+		}
+		}
+		// "192.168.200.72"
+
+	}
+
+}
